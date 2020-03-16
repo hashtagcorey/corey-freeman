@@ -1,8 +1,100 @@
 <html>
 	<head>
 		<title>Corey Freeman</title>
+		
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+
+		<link rel="stylesheet"href="./inc/style.css">
+<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 	</head>
 	<body>
-		Morp.
-	</body>
+			<header>
+			<h1>Corey Freeman</h1>
+			<h2>Raleigh, NC Front-End Developer</h2>
+			<p>My name is Corey Freeman, and here is a sample of my coding snippets:</p>
+			</header>
+					<div class="page-wrapper">
+
+		<div class="coding-sample">
+			<div class="code-description">
+				<h3>Calculate The Third Thursday of the Month (PHP)</h3>
+				<p>This code automatically calculates the 3rd Thursday of the month, and determines if it is closer in time to the current month. The result is either the third Thursday of the current month, or the third Thursday upcoming, whichever is next. <strong>This allows for an automated alert for the upcoming showcase, removing a tedious recurring administrative task.</strong></p>
+			</div>
+			<div class="code-display">
+		<pre><code class="language-php hljs">
+//Calculate Show Dates for Overload
+function overload_dates() {
+$last_show = date("M-d-Y", strtotime("third thursday of this month")); //christmas day after
+$next_show = date("M-d-Y", strtotime("third thursday of next month")); //
+//Last Show Sooner than Next? Check again in january.
+if($last_show >= $next_show) { $display_show = $last_show; } 
+if($last_show <= $next_show) { $display_show = $next_show; }
+return $display_show;
+}
+		</code></pre>
+			</div>
+		</div>
+		<div class="coding-sample">
+			<div class="code-description">
+			<h3>Create an Archive Page via Meta Data (PHP w/ WordPress)</h3>
+			<p>A work-around for creating individual archive displays, based on a custom taxonomy in WordPress. Instead of listing the content by type or author, each "page" filed under a certain "term" is organized and named and the pages are individually linked to. <strong>This results in dynamic archive generation that can be shown and linked anywhere on the website.</strong> <em>Escapes have been added where necessary to display source code.</em></p>
+			</div>
+			<div class="code-display">
+			<pre><code class ="hljs">function show_all_comics() {
+$args = array( 'hide_empty=0' );
+$terms = get_terms( 'story', $args );
+if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+    $count = count( $terms );
+    $i = 0;
+    $term_list = '<\div class="rfd-comic-archive"><\h4>Stories:<\/h4>';
+    foreach ( $terms as $term ) {
+        $i++;
+        $term_list .= '<\a class="rfd-comic-archive-link" href="' . esc_url( get_term_link( $term ) ) . '" alt="' . esc_attr( sprintf( __( 'View all post filed under %s', 'my_localization_domain' ), $term->name ) ) . '">' . $term->name . '<\/a>';
+        if ( $count != $i ) {
+            $term_list .= ' &middot; ';
+        }
+        else {
+            $term_list .= '<\/div>';
+        }
+    }
+ echo $term_list;}}
+			</code></pre>
+			</div>
+		</div>
+		<div class="coding-sample">
+			<div class="code-description">
+				<h3>Highlight Menu Item On Scroll (jQuery)</h3>
+				<p>Adapted for a one-page website, I tweaked the code to work automatically when a WordPress block group is present. It allows for the creation of scrolling sections without individually coding a ton of anchors. Because of this, <strong>adding and removing page sections is scalable.</strong></p>
+			</div>
+		<div class="code-display">
+			<pre><code class="language-jquery hljs">
+jQuery(function ($) {
+    //Set first menu item as active
+    $('.menu-item:first-child a').addClass('rfd-menu-active')
+    $(window).scroll(function () {
+        //Create variable to get the current vertical position
+        var scrollPos = $(window).scrollTop();
+        //For each section with the class ds-section
+        $('.wp-block-group').each(function (i) {
+            //Create variable to calculate when to add active class
+            var topPos = $(this).offset().top;
+            //If the section is equal to or less than 80px from the top of the page
+            if ((topPos - scrollPos) <= 200) {
+                //Remove the active class from the previous menu item
+                $('.rfd-menu-active').removeClass('rfd-menu-active')
+                //Add the class to the current menu item
+                $('.menu-item a').eq(i).addClass('rfd-menu-active')
+            }
+        })
+    });
+});</code></pre>
+		</div>
+		</div>
+		</div>
+		<footer>
+			<p>Corey Freeman | <a href="https://rosefreemandigital.com">Rose-Freeman Digital</a></p>
+		</footer>
+</body>
 </html>

@@ -1,0 +1,24 @@
+body {
+	font-size: 17px;
+	line-height: 1.5em;
+
+    font-family: 'Source Sans Pro', sans-serif;
+
+}
+.page-wrapper, header, footer {
+}
+header, footer {	
+	text-align: center;
+	padding: 1vh 0;
+}
+.coding-sample {
+	margin: 5vh auto;
+	width: 50%;
+	border-top: 1px solid #eee;
+	padding-top: 1vh;
+}
+.coding-sample .code-description {
+	
+}
+.coding-sample .code-display {
+}
